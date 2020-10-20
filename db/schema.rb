@@ -15,13 +15,13 @@ ActiveRecord::Schema.define(version: 2020_09_03_002752) do
   create_table "assessments", force: :cascade do |t|
     t.boolean "participating"
     t.string "comment"
-    t.integer "teacher_id", null: false
+    t.integer "class_period_id", null: false
     t.integer "student_id", null: false
     t.integer "cycle"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["class_period_id"], name: "index_assessments_on_class_period_id"
     t.index ["student_id"], name: "index_assessments_on_student_id"
-    t.index ["teacher_id"], name: "index_assessments_on_teacher_id"
   end
 
   create_table "class_periods", force: :cascade do |t|
@@ -55,8 +55,8 @@ ActiveRecord::Schema.define(version: 2020_09_03_002752) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "assessments", "class_periods"
   add_foreign_key "assessments", "students"
-  add_foreign_key "assessments", "teachers"
   add_foreign_key "class_periods", "teachers"
   add_foreign_key "registrations", "class_periods"
   add_foreign_key "registrations", "students"

@@ -3,7 +3,7 @@ class CreateAssessments < ActiveRecord::Migration[6.0]
     create_table :assessments do |t|
       t.boolean :participating
       t.string :comment
-      t.references :teacher, null: false, foreign_key: true
+      t.references :class_period, null: false, foreign_key: true
       t.references :student, null: false, foreign_key: true
       t.integer :cycle
       t.timestamps
